@@ -1,0 +1,28 @@
+// Thẻ xăm: lời dạy để suy ngẫm, không đoán vận mệnh.
+// Câu chữ do dự án tự diễn đạt (phỏng ý), không chép nguyên văn bản dịch nào.
+export const LOI_DAY = [
+  { text: 'Tâm dẫn đầu mọi việc. Ý nghĩ trong sáng thì niềm vui theo ta như bóng không rời hình.', src: 'Phỏng ý Kinh Pháp Cú, câu 2', ask: 'Hôm nay ý nghĩ nào đang dẫn đường cho bạn?' },
+  { text: 'Hận thù không thể dập tắt hận thù; chỉ có tình thương mới làm hận thù lắng xuống.', src: 'Phỏng ý Kinh Pháp Cú, câu 5', ask: 'Có ai bạn có thể buông bỏ một chút giận hờn không?' },
+  { text: 'Thắng ngàn quân địch không bằng tự thắng chính mình.', src: 'Phỏng ý Kinh Pháp Cú, câu 103', ask: 'Thói quen nhỏ nào bạn muốn vượt qua tuần này?' },
+  { text: 'Một lời có ích, nghe xong lòng được yên, quý hơn ngàn lời vô nghĩa.', src: 'Phỏng ý Kinh Pháp Cú, câu 100', ask: 'Lời nào bạn nói hôm nay khiến ai đó nhẹ lòng?' },
+  { text: 'Như núi đá vững chãi trước gió, người trí không dao động trước khen chê.', src: 'Phỏng ý Kinh Pháp Cú, câu 81', ask: 'Lời khen hay lời chê nào đang làm bạn chao đảo?' },
+  { text: 'Giọt nước nhỏ rơi mãi cũng đầy bình; việc lành nhỏ làm mãi cũng thành lớn.', src: 'Phỏng ý Kinh Pháp Cú, câu 122', ask: 'Một việc tốt nhỏ bạn có thể làm ngay hôm nay là gì?' },
+  { text: 'Đừng đuổi theo quá khứ, đừng lo âu tương lai. Hãy sống trọn vẹn ngay giây phút này.', src: 'Phỏng ý Kinh Nhất Dạ Hiền Giả', ask: 'Ngay lúc này, bạn đang nghe thấy những âm thanh nào?' },
+  { text: 'Không bệnh là lợi lớn nhất, biết đủ là giàu nhất.', src: 'Phỏng ý Kinh Pháp Cú, câu 204', ask: 'Điều gì bạn đang có mà ít khi để ý biết ơn?' },
+  { text: 'Hãy tự mình thắp đuốc lên mà đi.', src: 'Phỏng ý Kinh Đại Bát Niết-bàn', ask: 'Bạn đang chờ ai đó quyết định thay mình điều gì?' },
+  { text: 'Trong sạch hay ô nhiễm đều do chính ta; không ai làm thay ai được.', src: 'Phỏng ý Kinh Pháp Cú, câu 165', ask: 'Điều gì trong ngày hôm nay hoàn toàn nằm trong tay bạn?' },
+  { text: 'Như hoa đẹp mà không hương, lời hay mà không làm thì chẳng kết quả gì.', src: 'Phỏng ý Kinh Pháp Cú, câu 51', ask: 'Lời hứa nào với chính mình bạn sẽ bắt tay làm?' },
+  { text: 'Lời dịu dàng khiến lòng người mở ra; lời thô ác chỉ dựng thêm bức tường.', src: 'Lời nhắc tĩnh tâm', ask: 'Bạn muốn nói lời dịu dàng với ai hôm nay?' },
+  { text: 'Thấy lỗi người thì dễ, thấy lỗi mình mới khó.', src: 'Phỏng ý Kinh Pháp Cú, câu 252', ask: 'Gần đây bạn đã trách ai về điều chính mình cũng mắc?' },
+  { text: 'Người biết mình còn chưa hiểu đã có một phần trí tuệ.', src: 'Phỏng ý Kinh Pháp Cú, câu 63', ask: 'Điều gì bạn sẵn lòng học lại từ đầu?' },
+  { text: 'Mọi thứ hợp thành đều vô thường; buồn hay vui rồi cũng đi qua.', src: 'Lời dạy về vô thường', ask: 'Nỗi buồn nào bạn có thể để nó trôi qua như mây?' },
+  { text: 'Bình an không ở đâu xa; nó nằm trong hơi thở bạn đang thở.', src: 'Lời nhắc tĩnh tâm', ask: 'Hãy thở chậm ba hơi. Bạn thấy gì thay đổi?' },
+  { text: 'Một ngọn đèn thắp sáng ngàn ngọn đèn khác mà không hề bớt sáng. Niềm vui chia sẻ cũng vậy.', src: 'Phỏng ý Kinh Tứ Thập Nhị Chương', ask: 'Niềm vui nào bạn muốn chia cho người khác?' },
+  { text: 'Giữ cơn giận như cầm than hồng định ném người: tay mình bỏng trước.', src: 'Lời dạy lưu truyền', ask: 'Cơn giận nào bạn có thể đặt xuống ngay bây giờ?' },
+  { text: 'Không biết đủ thì giàu vẫn nghèo; biết đủ thì nghèo vẫn giàu.', src: 'Phỏng ý Kinh Di Giáo', ask: 'Thứ gì bạn đang muốn thêm mà thật ra đã đủ?' },
+  { text: 'Đừng làm điều ác, siêng làm việc lành, giữ tâm ý trong sạch.', src: 'Phỏng ý Kinh Pháp Cú, câu 183', ask: 'Trong ba điều ấy, điều nào bạn muốn chú tâm hôm nay?' },
+  { text: 'Như con ong lấy mật mà không làm tổn hại sắc hương của hoa.', src: 'Phỏng ý Kinh Pháp Cú, câu 49', ask: 'Bạn có thể nhận giúp đỡ mà vẫn nhẹ nhàng với người khác thế nào?' },
+  { text: 'Đi, đứng, nằm, ngồi đều có thể là thiền khi ta biết mình đang làm gì.', src: 'Lời nhắc tĩnh tâm', ask: 'Việc thường ngày nào bạn sẽ làm thật chậm và tỉnh thức?' },
+  { text: 'Đêm dài với người mất ngủ, đường dài với kẻ mỏi chân.', src: 'Phỏng ý Kinh Pháp Cú, câu 60', ask: 'Bạn cần nghỉ ngơi ở đâu trong cuộc sống lúc này?' },
+  { text: 'Nói ít mà đúng, làm nhiều mà lặng lẽ.', src: 'Lời nhắc tĩnh tâm', ask: 'Việc gì bạn có thể làm mà không cần ai biết?' },
+];

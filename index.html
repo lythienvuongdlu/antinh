@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>An Tịnh – Chùa trên mây</title>
+  <meta name="description" content="Bước vào chính điện 3D, thắp một nén hương, gõ mõ, thỉnh chuông, ngồi thiền vài phút. Trải nghiệm văn hóa tĩnh tâm, miễn phí.">
+  <meta name="theme-color" content="#0c0705">
+  <meta property="og:title" content="An Tịnh – Chùa trên mây">
+  <meta property="og:description" content="Thắp hương, gõ mõ, thiền vài phút trong chính điện 3D.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lythienvuongdlu.github.io/antinh/">
+  <meta property="og:image" content="https://lythienvuongdlu.github.io/antinh/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Noto+Serif:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+  { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+  } }
+  </script>
+</head>
+<body>
+  <canvas id="scene"></canvas>
+
+  <!-- Màn chào -->
+  <section id="welcome" class="welcome">
+    <div class="welcome-inner">
+      <p class="eyebrow">Chùa trên mây</p>
+      <h1>An Tịnh</h1>
+      <p class="lead">Dừng lại vài phút. Thắp một nén hương, nghe một tiếng chuông, thở chậm lại.</p>
+      <button id="enter" class="btn-primary">Bước vào chính điện</button>
+      <p class="fine">Trải nghiệm văn hóa và tĩnh tâm, không thay thế việc tu tập hay lễ bái tại chùa.<br>Không thu tiền công đức. Lời nguyện chỉ lưu trên máy của bạn.</p>
+    </div>
+  </section>
+
+  <!-- Thanh trên -->
+  <header class="topbar hidden" id="topbar">
+    <div class="brand">An Tịnh</div>
+    <div class="top-actions">
+      <button class="chip" id="streakChip" title="Nhật ký tu tập"><span class="flame"></span><span id="streakN">0</span> ngày</button>
+      <button class="icon-btn" id="soundBtn" title="Âm nền" aria-pressed="false">
+        <svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="wave" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/></svg>
+      </button>
+      <button class="icon-btn" id="shareBtn" title="Chia sẻ">
+        <svg viewBox="0 0 24 24"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Thanh công cụ dưới -->
+  <nav class="dock hidden" id="dock">
+    <button data-act="incense"><svg viewBox="0 0 24 24"><path d="M9 21V9M12 21V6M15 21V9"/><path d="M5 21h14"/><path class="ember" d="M9 8.2v.1M12 5.2v.1M15 8.2v.1"/></svg><span>Thắp hương</span></button>
+    <button data-act="mo"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="14" rx="8" ry="6"/><path d="M7 14h10"/><path d="M15 3l4 4"/></svg><span>Gõ mõ</span></button>
+    <button data-act="bell"><svg viewBox="0 0 24 24"><path d="M12 3v2M7 18c0-6 1-11 5-11s5 5 5 11"/><path d="M5 18h14"/><path d="M11 21h2"/></svg><span>Thỉnh chuông</span></button>
+    <button data-act="meditate"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.2"/><path d="M12 9v5M6 19c2-1.5 4-2 6-2s4 .5 6 2M8 13l4 1 4-1"/></svg><span>Ngồi thiền</span></button>
+    <button data-act="draw"><svg viewBox="0 0 24 24"><path d="M8 9h8l-1 12H9z"/><path d="M10 9V3M12 9V2M14 9V4"/></svg><span>Xin xăm</span></button>
+  </nav>
+
+  <div id="floaters"></div>
+  <div id="toast" class="toast"></div>
+
+  <!-- Thắp hương -->
+  <dialog id="incenseDlg" class="sheet">
+    <form method="dialog">
+      <h2>Thắp hương</h2>
+      <p class="muted">Nếu muốn, hãy viết vài dòng điều bạn mong cho mình hoặc người thân. Không bắt buộc.</p>
+      <textarea id="prayer" maxlength="200" rows="3" placeholder="Con mong mẹ mau khỏe…"></textarea>
+      <div class="row-between"><span class="muted small">Chỉ lưu trên máy của bạn</span><span class="muted small" id="prayerCount">0/200</span></div>
+      <div class="seg" role="radiogroup">
+        <label><input type="radio" name="sticks" value="1"><span>1 nén</span></label>
+        <label><input type="radio" name="sticks" value="3" checked><span>3 nén</span></label>
+      </div>
+      <div class="actions">
+        <button value="cancel" class="btn-ghost">Để sau</button>
+        <button value="ok" class="btn-primary">Thắp</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Thiền -->
+  <dialog id="meditateDlg" class="sheet">
+    <form method="dialog">
+      <h2>Ngồi thiền</h2>
+      <p class="muted">Ngồi thẳng lưng, thả lỏng vai. Chuông sẽ báo lúc bắt đầu và kết thúc.</p>
+      <div class="seg four" role="radiogroup">
+        <label><input type="radio" name="min" value="1"><span>1 phút</span></label>
+        <label><input type="radio" name="min" value="3" checked><span>3 phút</span></label>
+        <label><input type="radio" name="min" value="5"><span>5 phút</span></label>
+        <label><input type="radio" name="min" value="10"><span>10 phút</span></label>
+      </div>
+      <div class="actions">
+        <button value="cancel" class="btn-ghost">Để sau</button>
+        <button value="ok" class="btn-primary">Bắt đầu</button>
+      </div>
+    </form>
+  </dialog>
+
+  <section id="meditation" class="meditation hidden">
+    <div class="breath"><div class="breath-ring"></div><div class="breath-label" id="breathLabel">Hít vào</div></div>
+    <div class="timer" id="medTimer">3:00</div>
+    <button class="btn-ghost light" id="medStop">Kết thúc</button>
+  </section>
+
+  <!-- Xin xăm -->
+  <dialog id="drawDlg" class="sheet">
+    <div class="draw-stage" id="drawStage">
+      <div class="tube" id="tube">
+        <div class="tube-sticks"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="tube-body"></div>
+        <div class="tube-stick" id="poppedStick"></div>
+      </div>
+      <p class="muted center" id="drawHint">Tĩnh tâm, nghĩ về điều bạn đang băn khoăn, rồi lắc ống.</p>
+      <div class="actions center"><button class="btn-primary" id="shakeBtn" type="button">Lắc ống xăm</button></div>
+    </div>
+    <div class="card hidden" id="drawCard">
+      <p class="eyebrow" id="cardNo">Thẻ số 1</p>
+      <blockquote id="cardText"></blockquote>
+      <p class="src" id="cardSrc"></p>
+      <div class="reflect"><span>Suy ngẫm</span><p id="cardAsk"></p></div>
+      <p class="fine">Thẻ là lời dạy để suy ngẫm, không phải lời đoán vận mệnh.</p>
+      <div class="actions">
+        <button class="btn-ghost" type="button" id="drawClose">Đóng</button>
+        <button class="btn-primary" type="button" id="drawShare">Chia sẻ thẻ này</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Nhật ký -->
+  <dialog id="journalDlg" class="sheet">
+    <h2>Nhật ký tu tập</h2>
+    <div class="week" id="week"></div>
+    <div class="stats" id="stats"></div>
+    <h3>Lời nguyện gần đây</h3>
+    <ul class="prayers" id="prayerList"></ul>
+    <div class="actions">
+      <button class="btn-ghost" type="button" id="clearPrayers">Xóa lời nguyện</button>
+      <button class="btn-primary" type="button" data-close>Đóng</button>
+    </div>
+  </dialog>
+
+  <!-- Chia sẻ -->
+  <dialog id="shareDlg" class="sheet">
+    <h2>Chia sẻ</h2>
+    <img id="shareImg" class="share-img" alt="Ảnh chia sẻ">
+    <div class="actions">
+      <button class="btn-ghost" type="button" data-close>Đóng</button>
+      <a class="btn-ghost" id="shareDownload" download="an-tinh.jpg">Tải ảnh</a>
+      <button class="btn-primary" type="button" id="shareNative">Chia sẻ</button>
+    </div>
+  </dialog>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
